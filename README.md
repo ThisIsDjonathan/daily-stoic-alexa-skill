@@ -75,14 +75,18 @@ API_KEY='your API key goes here'
 Update the `main()` function in the `text-to-speech.py` file adding your language:
 ```
 def main():
-    create_folders_if_not_exists()
+    language = 'portuguese'
+    create_folders_if_not_exists(language)
 
-    quotes = get_quotes_from_file('./quotes-in-english.json')
-    process_data(quotes, 'english')
+    quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
+    process_data(quotes, language)
 
     # add your code here!
-    quotes = get_quotes_from_file('./quotes-in-YOUR_LANGUAGE.json')
-    process_data(quotes, 'YOUR_LANGUAGE')
+    language = 'your language' # TODO: add your language here
+    create_folders_if_not_exists(language)
+
+    quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
+    process_data(quotes, language)
 ```
 
 #### Push a PR
