@@ -4,8 +4,7 @@
 This project aims to provide daily Stoic quotes for Alexa users and show how I built my first Alexa Skill 😄💻
 
 You can download this skill on the Skill Store in your Alexa app.
-- Download the **English** version for free [here]([url](https://www.amazon.com.br/Djonathan-Krause-Di%C3%A1rio-Estoico/dp/B0CRZ9Y9K7/ref=sr_1_1?brr=1&qid=1708199685&rd=1&s=alexa-skills&sr=1-1))!
-- Baixe grátis a versão em **Português** [aqui]([url](https://www.amazon.com.br/Djonathan-Krause-Di%C3%A1rio-Estoico/dp/B0CRZ9Y9K7/ref=sr_1_1?brr=1&qid=1708199685&rd=1&s=alexa-skills&sr=1-1))!
+- Baixe grátis a versão em **Português** [aqui](https://www.amazon.com.br/Djonathan-Krause-Di%C3%A1rio-Estoico/dp/B0CRZ9Y9K7/ref=sr_1_1?brr=1&qid=1708199685&rd=1&s=alexa-skills&sr=1-1)!
 
 # How I built this
 The premise for this Alexa Skill was to have a single Stoic Quote for each day of the year.<br>
