@@ -71,7 +71,7 @@ Then update the `.env` file by adding your API Key.
 API_KEY='your API key goes here'
 ```
 
-Update the `main()` function in the `text-to-speech.py` file adding your language:
+Update the `main()` function in the `text-to-speech.py` file adding your language the run `python text-to-speech.py`:
 ```
 def main():
     language = 'portuguese'
