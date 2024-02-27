@@ -4,7 +4,7 @@
 This project aims to provide daily Stoic quotes for Alexa users and show how I built my first Alexa Skill 😄💻
 
 You can download this skill on the Skill Store in your Alexa app.
-- Baixe grátis a versão em **Português** [aqui](https://www.amazon.com.br/Djonathan-Krause-Di%C3%A1rio-Estoico/dp/B0CRZ9Y9K7/ref=sr_1_1?brr=1&qid=1708199685&rd=1&s=alexa-skills&sr=1-1)!
+- Download the **portuguese** version [here](https://www.amazon.com.br/Djonathan-Krause-Di%C3%A1rio-Estoico/dp/B0CRZ9Y9K7/ref=sr_1_1?brr=1&qid=1708199685&rd=1&s=alexa-skills&sr=1-1)!
 
 # How I built this
 The premise for this Alexa Skill was to have a single Stoic Quote for each day of the year.<br>
@@ -29,6 +29,8 @@ On the first try, I used a text feed but the current text-to-speech used by Alex
 ┃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┗ 🎧 `2.mp3`<br>
 ┃   ┗ 📂 english <br>
 ┃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┗ 🎧 `366.mp3`<br>
+
+Note: After generating all audios I noticed some were too quiet. To not generate all again I increased the volume for the portuguese audio files. This is done in the `make-it-louder.py`.
 
 ## The Alexa Skill 🤖
 The Alexa Skill is a Flash Briefing skill created in the [Alexa Developer Console](https://developer.amazon.com/alexa/console) that will consume our JSON feed API hosted on AWS.
