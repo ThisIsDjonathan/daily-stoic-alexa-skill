@@ -2,6 +2,10 @@ from elevenlabs import generate
 from dotenv import load_dotenv
 import json
 import os
+import glob
+
+def list_quote_files():
+    return [os.path.splitext(os.path.basename(file))[0] for file in glob.glob("./assets/quotes/*.json")]
 
 def get_quotes_from_file(path):
     try:
@@ -20,7 +24,7 @@ def process_data(quotes, language):
             continue
         try:
             print(f'Processing quote {i+1}/{len(quotes)}')
-            audio = text_to_speech(quote, my_api_key)
+            audio = text_to_speech(quote, my_api_key, language)
             save_audio_to_file(audio, f'./assets/audios/{language}/{i+1}.mp3')
         except Exception as e:
             print(f'Error processing quote {i+1}/{len(quotes)}\n\nERROR: {e}')
@@ -43,15 +47,22 @@ def get_api_key():
 def audio_already_exists_for_quote(quote_number, language):
     return os.path.exists(f'./assets/audios/{language}/{quote_number+1}.mp3')
 
-def text_to_speech(text, my_api_key):
+def text_to_speech(text, my_api_key, language):
     if text == '':
         print('Empty text, skipping.')
         return
 
+    if language == 'english':
+        voice_to_use = "Michael"
+        model_to_use = "eleven_multilingual_v1"
+    else: # this model has more languages available
+        voice_to_use = "Rachel"
+        model_to_use = "eleven_multilingual_v2"
+
     if my_api_key is None:
-        return generate(text=text, voice="Rachel", model="eleven_multilingual_v2")
+        return generate(text=text, voice=voice_to_use, model=model_to_use)
     else:
-        return generate(text=text, api_key=my_api_key, voice="Rachel", model="eleven_multilingual_v2")
+        return generate(text=text, api_key=my_api_key, voice=voice_to_use, model=model_to_use)
 
 def save_audio_to_file(audio, filename):
     with open(filename, 'wb') as f:
@@ -69,11 +80,12 @@ def show_report(language):
     print(f'\n\nREPORT: {total_audios_already_created} of 366 audios in {language} are already created.\nMissing {missing_audios} audios to complete.\n')
 
 def main():
-    available_languages = ['portuguese', 'english']
+    available_languages = list_quote_files()
     for language in available_languages:
+        print(f'Processing language: {language}')
         create_folders_if_not_exists(language)
 
-        quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
+        quotes = get_quotes_from_file('./assets/quotes/' + language + '.json')
         process_data(quotes, language)
 
 if __name__ == '__main__':
