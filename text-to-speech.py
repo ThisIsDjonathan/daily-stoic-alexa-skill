@@ -69,11 +69,12 @@ def show_report(language):
     print(f'\n\nREPORT: {total_audios_already_created} of 366 audios in {language} are already created.\nMissing {missing_audios} audios to complete.\n')
 
 def main():
-    language = 'portuguese'
-    create_folders_if_not_exists(language)
+    available_languages = ['portuguese', 'english']
+    for language in available_languages:
+        create_folders_if_not_exists(language)
 
-    quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
-    process_data(quotes, language)
+        quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
+        process_data(quotes, language)
 
 if __name__ == '__main__':
     load_dotenv()
