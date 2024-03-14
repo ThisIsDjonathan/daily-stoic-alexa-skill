@@ -12,8 +12,8 @@ So the first thing I did was create a `.json` file with 366 entries.
 
 📦 daily-stoic-alexa-skill<br>
 ┣ 📂 assets<br>
-┃ ┗ 📜 `quotes-in-portuguese.json`<br>
-┃ ┗ 📜 `quotes-in-english.json`<br>
+┃ ┗ 📜 `portuguese.json`<br>
+┃ ┗ 📜 `english.json`<br>
 
 
 ## The Speech to Text 🗣️👂
@@ -49,11 +49,11 @@ The script details can be found in the `TheDailyStoic-LambdaFunction.py` file �
 ### You can contribute by adding support for more languages! 🌎<br>
 
 #### Translating the quotes
-To do so, first, you have to translate the `quotes-in-english.json` to your language and then create a new `quotes-in-YOUR_LANGUAGE.json` file and put it in the `assets/` directory.
+To do so, first, you need to translate the `english.json` to your language and then create a new `YOUR_LANGUAGE.json` file and put it in the `assets/` directory.
 
 <br>📦 daily-stoic-alexa-skill<br>
 ┣ 📂 assets<br>
-┃ ┗ 📜 `quotes-in-YOUR_LANGUAGE.json`<br>
+┃ ┗ 📜 `YOUR_LANGUAGE.json`<br>
 
 #### Getting an ElevenLabs API Key
 You can do the text-to-speech using another tool, but if you want to use the same I used just go to the [ElevenLabs website](https://elevenlabs.io/) and create a free account.
@@ -73,22 +73,7 @@ Then update the `.env` file by adding your API Key.
 API_KEY='your API key goes here'
 ```
 
-Update the `main()` function in the `text-to-speech.py` file adding your language the run `python text-to-speech.py`:
-```
-def main():
-    language = 'portuguese'
-    create_folders_if_not_exists(language)
-
-    quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
-    process_data(quotes, language)
-
-    # add your code here!
-    language = 'your language' # TODO: add your language here
-    create_folders_if_not_exists(language)
-
-    quotes = get_quotes_from_file('./assets/quotes/quotes-in-' + language + '.json')
-    process_data(quotes, language)
-```
+Run `python text-to-speech.py` to convert the text to speech.
 
 #### Push a PR
 Finally, push a PR to this repo. I will merge it, add the new audio files to the S3 bucket, and make the Alexa Skill available in your country.
