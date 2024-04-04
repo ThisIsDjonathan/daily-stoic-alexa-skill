@@ -1,5 +1,6 @@
 from pydub import AudioSegment
 import os
+import sys
 
 INCREASE_VOLUME_IN_DB = 13
 
@@ -10,6 +11,16 @@ def louder(language_to_increase_volume, filename):
     louder_song.export(file_path, format='mp3')
 
 def main(language_to_increase_volume):
+    if len(sys.argv) > 1:
+        full_filename = sys.argv[1]
+        full_filename_parts = full_filename.split('/')
+        language = full_filename_parts[2]
+        dotmp3_filename = full_filename_parts[-1]
+        print(f'Making the {full_filename} louder')
+        louder(language, dotmp3_filename)
+        print(f'{dotmp3_filename} done.')
+        return
+
     for filename in os.listdir(f'assets/audios/{language_to_increase_volume}'):
         try:
             louder(language_to_increase_volume, filename)
