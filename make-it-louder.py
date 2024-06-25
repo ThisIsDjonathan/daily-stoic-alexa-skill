@@ -10,9 +10,14 @@ def louder(language_to_increase_volume, filename):
     louder_song = song + INCREASE_VOLUME_IN_DB
     louder_song.export(file_path, format='mp3')
 
-def main(language_to_increase_volume):
-    if len(sys.argv) > 1:
-        full_filename = sys.argv[1]
+def main():
+    language_to_increase_volume = 'english' # default value
+    if len(sys.argv) == 1:
+        print('Missing params. Usage: python make-it-louder.py <language> <filepath>')
+        return
+    if len(sys.argv) == 3:
+        language_to_increase_volume = sys.argv[1]
+        full_filename = sys.argv[2]
         full_filename_parts = full_filename.split('/')
         language = full_filename_parts[2]
         dotmp3_filename = full_filename_parts[-1]
@@ -20,6 +25,9 @@ def main(language_to_increase_volume):
         louder(language, dotmp3_filename)
         print(f'{dotmp3_filename} done.')
         return
+
+    language_to_increase_volume = sys.argv[1]
+    print(f'Making all {language_to_increase_volume} audios louder')
 
     for filename in os.listdir(f'assets/audios/{language_to_increase_volume}'):
         try:
@@ -30,5 +38,4 @@ def main(language_to_increase_volume):
             continue
 
 if __name__ == '__main__':
-    language_to_increase_volume = 'portuguese'
-    main(language_to_increase_volume)
+    main()

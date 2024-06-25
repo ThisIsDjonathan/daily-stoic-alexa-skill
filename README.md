@@ -31,6 +31,10 @@ On the first try, I used a text feed but the current text-to-speech used by Alex
 ┃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┗ 🎧 `366.mp3`<br>
 
 Note: After generating all audios I noticed some were too quiet. To not generate all again I increased the volume for the portuguese audio files. This is done in the `make-it-louder.py`.
+Usage: `python make-it-louder.py <language> <filepath>`
+Example:
+- For a specific file: `python make-it-louder.py assets/audios/portuguese/182.mp3`
+- For all files under the given language directory: `python make-it-louder.py portuguese`
 
 ## The Alexa Skill 🤖
 The Alexa Skill is a Flash Briefing skill created in the [Alexa Developer Console](https://developer.amazon.com/alexa/console) that will consume our JSON feed API hosted on AWS.
