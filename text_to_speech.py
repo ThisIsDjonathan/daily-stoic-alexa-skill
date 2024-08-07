@@ -66,7 +66,7 @@ def text_to_speech(text: str, my_api_key: Optional[str], language: str) -> bytes
         console.print('[yellow]Empty text, skipping.[/yellow]')
         return b''
 
-    voice_to_use = "Bill" if language == 'english' else "Rachel"
+    voice_to_use = "Bill"
     model_to_use = "eleven_multilingual_v1" if language == 'english' else "eleven_multilingual_v2"
 
     return generate(text=text, api_key=my_api_key, voice=voice_to_use, model=model_to_use)
