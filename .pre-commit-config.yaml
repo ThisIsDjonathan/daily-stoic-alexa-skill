@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-for-api-key-exposure
+        name: Check for API Key exposure
+        entry: python pre-commit-scripts/check_for_api_key_exposure.py
+        language: system
+        files: ^.env$
