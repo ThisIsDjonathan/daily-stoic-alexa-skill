@@ -6,6 +6,7 @@ import glob
 from rich.console import Console
 from rich.progress import track
 from typing import List, Optional
+from day_of_the_year import date_to_day_of_the_year
 
 console = Console()
 
@@ -98,18 +99,33 @@ def main() -> None:
             break
 
     while True:
-        quote_number = console.input("Enter quote number (optional): ").strip()
-        quote_number = int(quote_number) if quote_number.isdigit() else None
-        if quote_number is not None and (quote_number < 1 or quote_number > 366):
-            console.print(f'[bold red]Invalid quote number [code]{quote_number}[/code]. [italic]Must be between 1 and 366.[/italic][/bold red]')
-        else:
+        quote_number = console.input("Enter quote number or date (optional): ").strip()
+        if not quote_number:
+            quote_number = None
             break
+        if quote_number.isdigit():
+            quote_number = int(quote_number)
+            if (quote_number < 1 or quote_number > 366):
+                console.print(f'[bold red]Invalid quote number [code]{quote_number}[/code]. [italic]Must be between 1 and 366.[/italic][/bold red]')
+                continue
+            break
+        else:
+            try:
+                quote_number = date_to_day_of_the_year(quote_number)
+                break
+            except Exception as e:
+                console.print(f'[bright_red]{e}[/bright_red]')
+                quote_number = None
 
     while True:
-        force = console.input("Force processing (y/n): ").strip()
-        if force.lower() not in ['y', 'n']:
+        force = console.input("Force processing (y/N): ").strip()
+        if force.lower() not in ['y', 'n', '']:
             console.print(f'[bold red]Invalid option [code]{force}[/code]. [italic]Must be y or n.[/italic][/bold red]')
-        force = force.lower() == 'y'
+            continue
+        elif force == '' or force.lower() == 'n':
+            force = False
+        elif force.lower() == 'y':
+            force = True
         if force:
             console.print('[bold yellow]Force processing enabled. Existing audio files will be overwritten.[/bold yellow]')
         break

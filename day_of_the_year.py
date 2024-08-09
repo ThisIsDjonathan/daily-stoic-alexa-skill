@@ -3,6 +3,14 @@ from rich.console import Console
 
 console = Console()
 
+def date_to_day_of_the_year(date_str: str) -> int:
+    try:
+        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+        day_of_year = date_obj.timetuple().tm_yday
+    except Exception:
+        raise Exception("Invalid date format. Please use YYYY-MM-DD.")
+    return day_of_year
+
 def main() -> None:
     while True:
         today = datetime.now().strftime("%Y-%m-%d")
@@ -12,13 +20,12 @@ def main() -> None:
             date_str = today
 
         try:
-            date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+            day_of_year = date_to_day_of_the_year(date_str)
             break
-        except ValueError:
-            console.print("[bold red]Invalid date format. Please use YYYY-MM-DD.[/bold red]")
+        except Exception as e:
+            console.print(f'[bright_red]{e}[/bright_red]')
 
-    day_of_year = date_obj.timetuple().tm_yday
-    console.print(f'[bold green]Day of the year {day_of_year}[dim] - {date_str}[/dim][/bold green]')
+    console.print(f'[green]Day of the year [bold]{day_of_year}[/bold][dim] - {date_str}[/dim][/green]')
 
 if __name__ == "__main__":
     main()
