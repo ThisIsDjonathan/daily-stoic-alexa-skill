@@ -118,7 +118,7 @@ def main() -> None:
                 quote_number = None
 
     while True:
-        force = console.input("Force processing (y/N): ").strip()
+        force = console.input("Force processing, will overwrite the current file if exists (y/N): ").strip()
         if force.lower() not in ['y', 'n', '']:
             console.print(f'[bold red]Invalid option [code]{force}[/code]. [italic]Must be y or n.[/italic][/bold red]')
             continue
