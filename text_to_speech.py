@@ -101,6 +101,16 @@ def main() -> None:
     while True:
         quote_number = console.input("Enter quote number or date (optional): ").strip()
         if not quote_number:
+            while True:
+                answer = console.input("Do you [bold red]really want[/bold red] to process [bold red]all quotes[/bold red] (y/N): ").strip()
+                if answer.lower() not in ['y', 'n', '']:
+                    console.print(f'[bold red]Invalid option [code]{answer}[/code]. [italic]Must be y or n.[/italic][/bold red]')
+                    continue
+                elif answer == '' or answer.lower() == 'n':
+                    console.print('[bold yellow]Exiting...[/bold yellow]')
+                    raise SystemExit
+                elif answer.lower() == 'y':
+                    break
             quote_number = None
             break
         if quote_number.isdigit():
